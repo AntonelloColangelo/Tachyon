@@ -62,9 +62,24 @@ A second panel used six other organisms: whole samples from the public archives,
 
 Each program ran twice per organism and the table shows the median. The options were the same as in the human panel, with `--runThreadN 8` and `--limitBAMsortRAM 10000000000`. For every organism, the BAM alignment records of the two STAR runs and the two Tachyon runs had the same fingerprint, so all four were identical.
 
+## Five organisms at 16 threads
+
+The same samples of five organisms ran again with 16 threads, on a Google Cloud c2d-standard-32 VM (AMD EPYC 7B13, 32 vCPUs, 126 GB RAM, on demand), pinned to CPUs 0-15 (16 physical cores), on 3 November 2026, with the Tachyon 0.4.1 release package. *Paramecium* was not part of this run.
+
+| Organism | SRA run | Size | Reads | STAR 2.7.11b | Tachyon 0.4.1 | Faster by |
+|---|---|---:|---:|---:|---:|---:|
+| Rapeseed (*Brassica napus*) | SRR27584689 | 17.7 M pairs | 2x100 | 7.2 min | 1.2 min | 5.9x |
+| *Trypanosoma brucei* | ERR1816867 | 6.6 M pairs | 2x90 | 6.3 min | 1.2 min | 5.3x |
+| Mosquito (*Aedes aegypti*) | SRR35296346 | 15.2 M pairs | 2x101 | 3.1 min | 1.1 min | 2.7x |
+| *Chlamydomonas reinhardtii* | DRR522899 | 10.6 M pairs | 2x100 | 2.2 min | 0.5 min | 4.6x |
+| *Octopus bimaculoides* | SRR7645639 | 6.8 M pairs | 2x99 | 1.3 min | 0.3 min | 3.8x |
+| **All 5 organisms** | | **56.9 M pairs** | | **20.1 min** | **4.4 min** | **4.6x** |
+
+Each program ran twice per organism, in the order STAR, Tachyon, Tachyon, STAR, and the table shows the median. The two runs of each program differed by at most 3.2%. The options were those of the 8-thread panel with `--runThreadN 16`. For every organism, the BAM alignment records of the two Tachyon runs were compared with those of STAR and were identical; the STAR records at 16 threads were also identical to those at 8 threads.
+
 ## Limitations
 
 - One machine type and one thread count per panel. On other processors, disks and thread counts the speed-up can be different.
-- Eight human samples and six other organisms. Other read lengths, library types and options were tested by the author in separate runs not reported on this page.
+- Eight human samples and six other organisms (five at 16 threads). Other read lengths, library types and options were tested by the author in separate runs not reported on this page.
 - In the human panel STAR was timed once per sample, Tachyon twice.
 - Before relying on Tachyon, compare it with STAR 2.7.11b on a sample of your own data, with your own options.

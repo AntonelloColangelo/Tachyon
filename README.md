@@ -25,6 +25,15 @@ Eight complete human RNA-seq samples, 375 million reads and read pairs, aligned 
 
 The same holds beyond human: on six other organisms, from a protist to a plant, **STAR took 61.4 minutes and Tachyon 17.5 minutes, 3.5 times faster**, again with identical BAM records in every run.
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/benchmark-organisms-16t-dark.svg">
+    <img src="docs/benchmark-organisms-16t-light.svg" alt="Benchmark on 5 other organisms at 16 threads on 16 physical cores, whole samples and whole genomes, 57 million read pairs. STAR 2.7.11b: 20.1 minutes in total. Tachyon 0.4.1: 4.4 minutes, 4.6 times faster, with identical BAM records in every run." width="860">
+  </picture>
+</p>
+
+With 16 threads on 16 physical cores the gap grows: on the same samples of five of these organisms **STAR took 20.1 minutes and Tachyon 4.4 minutes, 4.6 times faster**, with identical BAM records in every run.
+
 <p align="center"><a href="docs/benchmark-whole-samples.md">Benchmark details: samples, index, hardware, commands and limitations</a> · <a href="docs/benchmark-k562.md">Earlier K562 benchmark</a></p>
 
 **Research use only.** Tachyon is a separate project from STAR. The executables are free for individual, non-commercial use; commercial use and use by organizations need a license from the author (see [LICENSE](LICENSE)). All tests were run by the author. Tachyon has not been independently validated.
