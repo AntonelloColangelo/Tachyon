@@ -46,9 +46,25 @@ The time is the wall-clock time of the whole run, from start to exit: reading an
 
 Each of the 16 Tachyon runs was compared with the STAR run on the same sample: BAM alignment records (decoded, so independent of compression), BAM header without the `@PG` line, `ReadsPerGene.out.tab`, `SJ.out.tab` and `Log.final.out` without dates and speeds. All 16 were identical. The comparison covers these outputs and options only; chimeric, transcriptome and STARsolo outputs were not part of this benchmark.
 
+## Six other organisms
+
+A second panel used six other organisms: whole samples from the public archives, aligned to the whole Ensembl genome of each organism with an index built by STAR 2.7.11b. It ran on a Google Cloud c2d-standard-16 VM (AMD EPYC 7B13, 16 vCPUs, 63 GB RAM, on demand), 8 threads pinned to CPUs 0-7, on 2 November 2026, with the Tachyon 0.4.1 release package.
+
+| Organism | SRA run | Size | Reads | STAR 2.7.11b | Tachyon 0.4.1 | Faster by |
+|---|---|---:|---:|---:|---:|---:|
+| *Paramecium tetraurelia* | SRR19666444 | 12.6 M pairs | 2x151 | 24.3 min | 9.2 min | 2.7x |
+| Rapeseed (*Brassica napus*) | SRR27584689 | 17.7 M pairs | 2x100 | 13.5 min | 2.4 min | 5.7x |
+| *Trypanosoma brucei* | ERR1816867 | 6.6 M pairs | 2x90 | 12.3 min | 2.3 min | 5.3x |
+| Mosquito (*Aedes aegypti*) | SRR35296346 | 15.2 M pairs | 2x101 | 5.4 min | 2.1 min | 2.5x |
+| *Chlamydomonas reinhardtii* | DRR522899 | 10.6 M pairs | 2x100 | 3.9 min | 0.9 min | 4.4x |
+| *Octopus bimaculoides* | SRR7645639 | 6.8 M pairs | 2x99 | 1.9 min | 0.6 min | 3.1x |
+| **All 6 organisms** | | **69.5 M pairs** | | **61.4 min** | **17.5 min** | **3.5x** |
+
+Each program ran twice per organism and the table shows the median. The options were the same as in the human panel, with `--runThreadN 8` and `--limitBAMsortRAM 10000000000`. For every organism, the BAM alignment records of the two STAR runs and the two Tachyon runs had the same fingerprint, so all four were identical.
+
 ## Limitations
 
-- One machine type and one thread count. On other processors, disks and thread counts the speed-up can be different.
-- Eight human samples. Other organisms, read lengths and library types were tested by the author in separate runs not reported on this page.
-- STAR was timed once per sample, Tachyon twice.
+- One machine type and one thread count per panel. On other processors, disks and thread counts the speed-up can be different.
+- Eight human samples and six other organisms. Other read lengths, library types and options were tested by the author in separate runs not reported on this page.
+- In the human panel STAR was timed once per sample, Tachyon twice.
 - Before relying on Tachyon, compare it with STAR 2.7.11b on a sample of your own data, with your own options.
