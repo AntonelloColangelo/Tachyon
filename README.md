@@ -175,10 +175,6 @@ The optional `--genomeLoad Mmap` mode maps the index files from the page cache i
 
 A fixed seed and one thread make a run repeatable on the test data, but they do not guarantee the same primary alignment or record order across thread counts or for every input.
 
-## Roadmap
-
-Priorities include a fully reproducible benchmark harness with input and index checksums, differential tests on more datasets and thread counts, and validation of more modes, such as STARsolo, chimeric alignments and index generation on real data. These are plans, not completed validations.
-
 <a id="author-and-support"></a>
 
 ## Cite and support
