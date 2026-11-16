@@ -1,0 +1,53 @@
+name: One-off release fix
+
+on:
+  push:
+    branches: [tachyon-0.4.1]
+    paths: [.github/workflows/fix-release.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace license files in the release archive and update the notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: tachyon-0.4.1
+        run: |
+          set -eu
+          D=tachyon-0.4.1-linux-x86_64
+          mkdir ../work && cd ../work
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$D.tar.gz" --pattern SHA256SUMS
+          sha256sum --check SHA256SUMS
+          OLDBIN=$(tar xzOf "$D.tar.gz" "$D/Tachyon" | sha256sum | cut -d' ' -f1)
+          tar xzf "$D.tar.gz"
+          cp "$GITHUB_WORKSPACE/LICENSE" "$GITHUB_WORKSPACE/THIRD_PARTY_NOTICES.md" "$GITHUB_WORKSPACE/CHANGES.md" "$D/"
+          [ "$(sha256sum "$D/Tachyon" | cut -d' ' -f1)" = "$OLDBIN" ]
+          tar czf "$D.tar.gz" "$D"
+          sha256sum "$D.tar.gz" "$D/Tachyon" > SHA256SUMS
+          sha256sum --check SHA256SUMS
+          head -1 "$D/LICENSE"
+          cat > notes.md <<'NOTES'
+          # Tachyon 0.4.1
+
+          Static Linux x86-64 executable (requires a processor with AVX2). Based on STAR 2.7.11b (MIT License, © Alexander Dobin); not an official STAR release. Research use only; not independently validated.
+
+          **Install** (no GitHub account needed):
+
+          ```bash
+          curl -fsSL https://raw.githubusercontent.com/AntonelloColangelo/Tachyon/tachyon-0.4.1/install.sh | bash
+          ```
+
+          **By hand:** download `tachyon-0.4.1-linux-x86_64.tar.gz` and `SHA256SUMS`, then `sha256sum -c SHA256SUMS`, `tar xzf tachyon-0.4.1-linux-x86_64.tar.gz` and run `./tachyon-0.4.1-linux-x86_64/Tachyon --version`. The options are those of STAR 2.7.11b.
+
+          **License:** free for individual, non-commercial use. Commercial use, use by organizations and redistribution need a written license from the author. See `LICENSE` in the archive. The notices of the open-source components are in `THIRD_PARTY_NOTICES.md`.
+          NOTES
+          sed -i 's/^          //' notes.md
+          gh release upload "$TAG" --repo "$GITHUB_REPOSITORY" --clobber "$D.tar.gz" SHA256SUMS
+          gh release edit "$TAG" --repo "$GITHUB_REPOSITORY" --notes-file notes.md
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets --jq '.assets[] | .name + " " + (.size|tostring)'
