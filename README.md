@@ -30,7 +30,7 @@ Tachyon exists because of STAR. If Tachyon is useful to you, please consider sta
 
 ## Install
 
-You need 64-bit x86 Linux with AVX2, and `curl`, `tar` and `sha256sum`. You do not need a GitHub account or administrator rights. Run this in a terminal:
+You need 64-bit x86 Linux with AVX2. Run this in a terminal:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/AntonelloColangelo/Tachyon/tachyon-0.4.1/install.sh | bash
