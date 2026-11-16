@@ -13,37 +13,38 @@ from PIL import Image, ImageDraw, ImageFont
 
 OUT = Path(__file__).resolve().parent
 FONT_PATH = os.environ.get("DEMO_FONT", "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf")
-FONT = ImageFont.truetype(FONT_PATH, 19)
-SMALL = ImageFont.truetype(FONT_PATH, 14)
-TITLE = ImageFont.truetype(FONT_PATH, 22)
+S = 2                                   # HD: every size below is doubled
+FONT = ImageFont.truetype(FONT_PATH, 19 * S)
+SMALL = ImageFont.truetype(FONT_PATH, 14 * S)
+TITLE = ImageFont.truetype(FONT_PATH, 22 * S)
 BG, PANEL = "#0b1120", "#111b2e"
 TEXT, MUTED, CYAN, GREEN = "#e6edf3", "#a1afc4", "#67e8f9", "#a3e635"
-W, H = 960, 430
+W, H = 960 * S, 430 * S
 
 
 def frame(title, subtitle, lines, active=None, cursor=False):
     im = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(im)
-    d.rounded_rectangle((14, 14, W - 15, H - 15), radius=16, fill=PANEL, outline="#293850")
+    d.rounded_rectangle((14 * S, 14 * S, W - 15 * S, H - 15 * S), radius=16 * S, fill=PANEL, outline="#293850", width=S)
     for x, color in [(38, "#fb7185"), (59, "#fbbf24"), (80, "#a3e635")]:
-        d.ellipse((x, 35, x + 10, 45), fill=color)
-    d.text((112, 27), "TACHYON / " + title, font=SMALL, fill=TEXT)
+        d.ellipse((x * S, 35 * S, (x + 10) * S, 45 * S), fill=color)
+    d.text((112 * S, 27 * S), "TACHYON / " + title, font=SMALL, fill=TEXT)
     label = "COMMAND WALKTHROUGH"
-    d.text((W - 38 - d.textlength(label, font=SMALL), 27), label, font=SMALL, fill=CYAN)
-    d.line((32, 65, W - 33, 65), fill="#293850")
-    d.text((38, 87), subtitle, font=TITLE, fill=TEXT)
+    d.text((W - 38 * S - d.textlength(label, font=SMALL), 27 * S), label, font=SMALL, fill=CYAN)
+    d.line((32 * S, 65 * S, W - 33 * S, 65 * S), fill="#293850", width=S)
+    d.text((38 * S, 87 * S), subtitle, font=TITLE, fill=TEXT)
     for i, (text, color) in enumerate(lines):
-        y = 144 + i * 31
+        y = (144 + i * 31) * S
         if i == active:
-            d.rounded_rectangle((28, y - 4, W - 29, y + 27), radius=5, fill="#1b2c42")
-        d.text((38, y), text, font=FONT, fill=color)
+            d.rounded_rectangle((28 * S, y - 4 * S, W - 29 * S, y + 27 * S), radius=5 * S, fill="#1b2c42")
+        d.text((38 * S, y), text, font=FONT, fill=color)
     if cursor and lines:
         text = lines[-1][0]
-        x = 38 + d.textlength(text, font=FONT)
-        y = 144 + (len(lines) - 1) * 31
-        d.rectangle((x + 2, y + 3, x + 11, y + 23), fill=CYAN)
-    d.line((32, 369, W - 33, 369), fill="#293850")
-    d.text((38, 385), "Illustrated commands / example paths / playback speed is illustrative", font=SMALL, fill=MUTED)
+        x = 38 * S + d.textlength(text, font=FONT)
+        y = (144 + (len(lines) - 1) * 31) * S
+        d.rectangle((x + 2 * S, y + 3 * S, x + 11 * S, y + 23 * S), fill=CYAN)
+    d.line((32 * S, 369 * S, W - 33 * S, 369 * S), fill="#293850", width=S)
+    d.text((38 * S, 385 * S), "Illustrated commands / example paths / playback speed is illustrative", font=SMALL, fill=MUTED)
     return im
 
 
