@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 566" width="860" height="566" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">Tachyon vs STAR 2.7.11b benchmark on ENCODE K562</title>
+<desc id="d">STAR: 113.59 s, 44,018 read pairs/s, 32.92 GiB peak RSS, 32.87 GiB anonymous. Tachyon 0.4: 24.345 s, 205,381 read pairs/s, 37.63 GiB peak RSS, 5.05 GiB anonymous.</desc>
+<rect width="860" height="566" rx="8" fill="#fcfcfb"/>
+<text x="24" y="34" font-size="20" font-weight="600" fill="#0b0b0b">Tachyon vs STAR 2.7.11b: 4.7× faster on the same RNA-seq input</text>
+<text x="24" y="56" font-size="13" fill="#52514e">ENCODE K562, first 5 million read pairs, GRCh38 + Ensembl 115, 16 threads, warm cache, median of 2 runs</text>
+<rect x="24" y="72" width="12" height="12" rx="3" fill="#2a78d6"/>
+<text x="42" y="83" font-size="13" fill="#52514e">STAR 2.7.11b</text>
+<rect x="174" y="72" width="12" height="12" rx="3" fill="#eb6834"/>
+<text x="192" y="83" font-size="13" fill="#52514e">Tachyon 0.4</text>
+<line x1="24" y1="96" x2="836" y2="96" stroke="#e4e3df" stroke-width="1"/>
+<text x="24" y="116" font-size="15" font-weight="600" fill="#0b0b0b">Wall time</text>
+<text x="117" y="116" font-size="12" fill="#7a7973">seconds, lower is better</text>
+<text x="24" y="142" font-size="12" fill="#52514e">Alignment of 5M read pairs</text>
+<path d="M24.0,148.0 H620.0 Q624.0,148.0 624.0,152.0 V166.0 Q624.0,170.0 620.0,170.0 H24.0 Z" fill="#2a78d6"><title>113.6 s</title></path>
+<text x="632.0" y="163" font-size="13" font-weight="600" fill="#0b0b0b">113.6 s</text>
+<path d="M24.0,174.0 H148.6 Q152.6,174.0 152.6,178.0 V192.0 Q152.6,196.0 148.6,196.0 H24.0 Z" fill="#eb6834"><title>24.3 s</title></path>
+<text x="160.6" y="189" font-size="13" font-weight="600" fill="#0b0b0b">24.3 s</text>
+<line x1="24" y1="212" x2="836" y2="212" stroke="#e4e3df" stroke-width="1"/>
+<text x="24" y="232" font-size="15" font-weight="600" fill="#0b0b0b">Throughput</text>
+<text x="126" y="232" font-size="12" fill="#7a7973">read pairs per second, higher is better</text>
+<text x="24" y="258" font-size="12" fill="#52514e">Read pairs per second</text>
+<path d="M24.0,264.0 H148.6 Q152.6,264.0 152.6,268.0 V282.0 Q152.6,286.0 148.6,286.0 H24.0 Z" fill="#2a78d6"><title>44,018</title></path>
+<text x="160.6" y="279" font-size="13" font-weight="600" fill="#0b0b0b">44,018</text>
+<path d="M24.0,290.0 H620.0 Q624.0,290.0 624.0,294.0 V308.0 Q624.0,312.0 620.0,312.0 H24.0 Z" fill="#eb6834"><title>205,381</title></path>
+<text x="632.0" y="305" font-size="13" font-weight="600" fill="#0b0b0b">205,381</text>
+<line x1="24" y1="328" x2="836" y2="328" stroke="#e4e3df" stroke-width="1"/>
+<text x="24" y="348" font-size="15" font-weight="600" fill="#0b0b0b">Memory</text>
+<text x="90" y="348" font-size="12" fill="#7a7973">GiB, lower is better</text>
+<text x="24" y="374" font-size="12" fill="#52514e">Peak RSS (includes mapped index pages)</text>
+<path d="M24.0,380.0 H544.9 Q548.9,380.0 548.9,384.0 V398.0 Q548.9,402.0 544.9,402.0 H24.0 Z" fill="#2a78d6"><title>32.92 GiB</title></path>
+<text x="556.9" y="395" font-size="13" font-weight="600" fill="#0b0b0b">32.92 GiB</text>
+<path d="M24.0,406.0 H620.0 Q624.0,406.0 624.0,410.0 V424.0 Q624.0,428.0 620.0,428.0 H24.0 Z" fill="#eb6834"><title>37.63 GiB</title></path>
+<text x="632.0" y="421" font-size="13" font-weight="600" fill="#0b0b0b">37.63 GiB</text>
+<text x="24" y="454" font-size="12" fill="#52514e">Private anonymous memory</text>
+<path d="M24.0,460.0 H544.1 Q548.1,460.0 548.1,464.0 V478.0 Q548.1,482.0 544.1,482.0 H24.0 Z" fill="#2a78d6"><title>32.87 GiB</title></path>
+<text x="556.1" y="475" font-size="13" font-weight="600" fill="#0b0b0b">32.87 GiB</text>
+<path d="M24.0,486.0 H100.5 Q104.5,486.0 104.5,490.0 V504.0 Q104.5,508.0 100.5,508.0 H24.0 Z" fill="#eb6834"><title>5.05 GiB</title></path>
+<text x="112.5" y="501" font-size="13" font-weight="600" fill="#0b0b0b">5.05 GiB</text>
+<text x="24" y="534" font-size="11.5" fill="#7a7973">Author-run historical benchmark of Tachyon 0.4 (not 0.4.1); STAR reference runs were reused. Tachyon used Mmap and a 4 GiB auxiliary index table.</text>
+<text x="24" y="551" font-size="11.5" fill="#7a7973">Output matched STAR: alignment records and splice junctions (fingerprints, 2/2 runs). Details: docs/benchmark-k562.md</text>
+</svg>

@@ -1,0 +1,88 @@
+Tachyon - Free Individual Non-Commercial License
+
+Copyright (c) 2026 Antonello Colangelo. All rights reserved.
+
+1. Ownership
+Tachyon (the source code, the executables Tachyon and TachyonLong, the scripts
+and the documentation, together "the Software") is and remains the property of
+the copyright holder, except for the parts listed in section 5. Except for the
+third-party components listed in section 5, all rights not expressly granted in
+this license are reserved by the copyright holder. The Software is licensed,
+not sold.
+
+2. Free license for individual, non-commercial use
+The copyright holder grants to any individual (a natural person) a free of
+charge, non-exclusive, non-transferable and personal license to download,
+install and run the executables Tachyon and TachyonLong, as published by the
+copyright holder in the releases of this repository, only for that
+individual's own non-commercial use: personal use, study, teaching, and
+non-commercial academic research whose results are not sold or used to provide
+paid services. No registration is needed.
+
+3. Uses that need a separate license
+Any other use needs a separate written license agreement with the copyright
+holder, which may require a fee. In particular, this includes:
+  a) commercial use: any use by or for a company or other for-profit
+     organization, any use to provide products or paid services (including
+     sequencing, analysis or bioinformatics services), and any use in
+     diagnostic or clinical work;
+  b) use by or for an organization (company, institution, laboratory, hospital
+     or other entity) by several people, or installation of the executables on
+     shared computers, servers, clusters or cloud services for several users;
+  c) copying or redistributing the executables, or making them available as a
+     service or as part of another product;
+  d) selling, renting or leasing the executables;
+  e) modifying, decompiling, disassembling or reverse engineering the
+     executables, except where the applicable law allows it despite this
+     restriction;
+  f) removing or changing this notice, the copyright notices or the notices in
+     THIRD_PARTY_NOTICES.md.
+This license grants no right to the source code, which is not published.
+A separate license can be asked to the copyright holder through this
+repository.
+
+4. Termination
+If you do not follow this license, your rights under it end automatically.
+The copyright holder may publish a new version of this license for future
+releases; the license under which you received a release stays valid for that
+release.
+
+5. Third-party components
+The Software is based on STAR 2.7.11b by Alexander Dobin and includes other
+open-source components (htslib, opal, SIMDe, bam_cat, SimpleGoodTuring) and
+links zlib and libdeflate. These components remain under their own licenses
+(MIT, BSD-style, zlib, public domain), whose full texts and copyright notices
+are in THIRD_PARTY_NOTICES.md. Every copy of the Software, in source or binary
+form, must include THIRD_PARTY_NOTICES.md. Nothing in this license limits the
+rights that those licenses grant for the third-party components themselves.
+The rights reserved in section 1 cover only the changes made by the copyright
+holder. The code, documentation, scripts and executables of STAR 2.7.11b
+(including the STAR manual in doc/, the files in docs/ and extras/ that come
+from STAR, and the original STAR executables in bin/) and of the components
+above stay under their own licenses, and their authors keep their copyright.
+Tachyon is not STAR and is not endorsed by Alexander Dobin, Cold Spring Harbor
+Laboratory, the National Institutes of Health, Genome Research Ltd, the Wellcome
+Trust Sanger Institute, the Medical Research Council or any other author of the
+third-party components.
+
+6. Disclaimer of warranty
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+7. Limitation of liability
+TO THE EXTENT ALLOWED BY THE APPLICABLE LAW, IN NO EVENT SHALL THE COPYRIGHT
+HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+7a. Not a medical device
+The Software is for research use only. It is not a medical device and is not
+certified for diagnostic use. Any use of its results for the diagnosis,
+treatment or care of patients is the sole responsibility of the user, who must
+validate the Software for that purpose under the applicable rules.
+
+8. Governing law
+This license is governed by Italian law.
+
+Draft of 16/11/2026, to be reviewed by a lawyer.
