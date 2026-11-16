@@ -21,7 +21,7 @@ Eight complete human RNA-seq samples, 375 million reads and read pairs, aligned 
 
 The method and all the results are in the preprint: Colangelo A., *Tachyon accelerates RNA-seq alignment while preserving STAR outputs in a multispecies benchmark*, Zenodo (2026), [doi:10.5281/zenodo.24155618](https://doi.org/10.5281/zenodo.24155618).
 
-Tachyon exists because of STAR. If Tachyon is useful to you, please cite STAR and consider starring both the [STAR repository](https://github.com/alexdobin/STAR) and [this one](https://github.com/AntonelloColangelo/Tachyon).
+Tachyon exists because of STAR. If Tachyon is useful to you, please consider starring both the [STAR repository](https://github.com/alexdobin/STAR) and [this one](https://github.com/AntonelloColangelo/Tachyon).
 
 > [!NOTE]
 > **Research use only.** Tachyon is a separate project from STAR. The executables are free for individual, non-commercial use; commercial use and use by organizations need a license from the author (see [LICENSE](LICENSE)). All tests were run by the author, and Tachyon has not been independently validated.
@@ -40,13 +40,27 @@ The installer downloads the latest release, verifies its checksums and installs 
 
 To update, run the same command again. To remove Tachyon, run `rm ~/.local/bin/Tachyon`.
 
+<a id="fixed-version"></a>
+
+**A fixed version for pipelines and methods.** The command above always installs the latest release, so the same line can give different versions at different times. In a pipeline, or in the methods of an analysis, install a fixed version instead. These lines download Tachyon 0.4.1 and check it against its published SHA-256 before installing it:
+
+```bash
+curl -fsSLO https://github.com/AntonelloColangelo/Tachyon/releases/download/tachyon-0.4.1/tachyon-0.4.1-linux-x86_64.tar.gz
+echo "84186171417e309c192c982312e6c4a0c458fd09917dd4c7ed580f1efbd49aa2  tachyon-0.4.1-linux-x86_64.tar.gz" | sha256sum --check
+tar xzf tachyon-0.4.1-linux-x86_64.tar.gz
+install -D -m 755 tachyon-0.4.1-linux-x86_64/Tachyon ~/.local/bin/Tachyon
+~/.local/bin/Tachyon --version
+```
+
+`sha256sum` must print `OK`, and the last line must print `Tachyon 0.4.1`. If your terminal cannot find `Tachyon` afterwards, add `export PATH="$HOME/.local/bin:$PATH"` to `~/.bashrc` and open a new terminal.
+
 Allow enough RAM for your genome index. STAR needs about 32 GB for a full human index, and Tachyon used 8% to 28% more memory than STAR in the author's tests.
 
 <a id="advanced-installation"></a>
 <a id="other-ways-to-install"></a>
 
 <details>
-<summary>Install in another folder, for every user, or by hand</summary>
+<summary>Install in another folder or for every user</summary>
 
 **Another folder.** Set `TACHYON_PREFIX` to install the command in `FOLDER/bin`:
 
@@ -59,19 +73,6 @@ curl -fsSL https://raw.githubusercontent.com/AntonelloColangelo/Tachyon/tachyon-
 ```bash
 sudo install -m 755 ~/.local/bin/Tachyon /usr/local/bin/Tachyon
 ```
-
-**By hand.**
-
-```bash
-curl -fsSLO https://github.com/AntonelloColangelo/Tachyon/releases/latest/download/SHA256SUMS
-curl -fsSLO https://github.com/AntonelloColangelo/Tachyon/releases/latest/download/tachyon-0.4.1-linux-x86_64.tar.gz
-tar xzf tachyon-*-linux-x86_64.tar.gz
-sha256sum --check SHA256SUMS
-install -D -m 755 tachyon-*-linux-x86_64/Tachyon ~/.local/bin/Tachyon
-~/.local/bin/Tachyon --version
-```
-
-The `sha256sum` command must print `OK` twice. If your terminal cannot find `Tachyon` after installation, add `export PATH="$HOME/.local/bin:$PATH"` to `~/.bashrc` and open a new terminal.
 
 </details>
 
@@ -91,7 +92,38 @@ Replace the example index path and read file names with your own. Keep your STAR
 
 For real analyses, build new indexes with STAR 2.7.11b. Tachyon's own index generation has been checked only on a small synthetic genome so far.
 
-Before relying on Tachyon, compare it with STAR 2.7.11b on a sample of your own data, with your own options.
+<a id="check-it-on-your-own-data"></a>
+
+### Check it on your own data
+
+Before relying on Tachyon, run STAR 2.7.11b and Tachyon on a sample of your own data with the same options, then compare the two output folders with [compare_with_star.sh](compare_with_star.sh). It needs `samtools`, and a few million read pairs are enough for a first check:
+
+```bash
+# 2 million read pairs from your sample
+zcat reads_1.fastq.gz | head -n 8000000 > sample_1.fastq
+zcat reads_2.fastq.gz | head -n 8000000 > sample_2.fastq
+
+# the same command twice: only the program name and the output folder change
+STAR --runThreadN 8 --genomeDir /path/to/index --readFilesIn sample_1.fastq sample_2.fastq \
+    --outSAMtype BAM SortedByCoordinate --quantMode GeneCounts --outFileNamePrefix star/
+Tachyon --runThreadN 8 --genomeDir /path/to/index --readFilesIn sample_1.fastq sample_2.fastq \
+    --outSAMtype BAM SortedByCoordinate --quantMode GeneCounts --outFileNamePrefix tachyon/
+
+# compare the two folders
+curl -fsSLO https://raw.githubusercontent.com/AntonelloColangelo/Tachyon/tachyon-0.4.1/compare_with_star.sh
+bash compare_with_star.sh star tachyon
+```
+
+The expected result ends like this, with the same number N of records from both programs:
+
+```text
+Aligned.sortedByCoord.out.bam: N records from STAR, N from Tachyon
+
+Compared: Aligned.sortedByCoord.out.bam SJ.out.tab ReadsPerGene.out.tab Log.final.out
+SAME AS STAR
+```
+
+The two BAM files will still differ in size and checksum, because Tachyon compresses them with libdeflate. The script compares what they contain: the decoded alignment records, the header without the `@PG` line, the splice junctions, the gene counts and the mapping statistics. If it prints `DIFFERENT FROM STAR`, check that both runs used the same reads, index, options and `--runThreadN`, and [open an issue](https://github.com/AntonelloColangelo/Tachyon/issues) with the files it lists.
 
 <a id="terminal-demos"></a>
 
@@ -140,7 +172,7 @@ The author compared Tachyon 0.4.1 with STAR 2.7.11b on the same data: paired-end
 
 ### What "identical" means
 
-The author compared Tachyon with STAR 2.7.11b with a fixed comparison script, using the same input files, index, options and number of threads. These outputs must match:
+The author compared Tachyon with STAR 2.7.11b with a fixed comparison script, using the same input files, index, options and number of threads. [compare_with_star.sh](compare_with_star.sh) applies the same criterion to your own runs. These outputs must match:
 
 - the alignment records in BAM or SAM files, compared as decoded text. The order of records at the same position can vary between runs and thread counts, also with STAR;
 - `SJ.out.tab`, `ReadsPerGene.out.tab` and `Log.final.out`, excluding the lines with dates and speeds.
@@ -221,7 +253,7 @@ Antonello Colangelo funded the Tachyon optimizations and their testing and valid
 
 ### Repository contents
 
-- `install.sh` is the installer used by the [installation command](#install).
+- `install.sh` is the installer used by the [installation command](#install), and `compare_with_star.sh` the comparison described in [Check it on your own data](#check-it-on-your-own-data).
 - `bin` contains unchanged, precompiled STAR 2.7.11b executables by Alexander Dobin for Linux and Mac OS X, under the MIT License. The Tachyon executable comes from a release, as described in [Install](#install).
 - `doc` contains the documentation, `docs` the benchmark pages and figures, and `extras` miscellaneous files and scripts.
 
