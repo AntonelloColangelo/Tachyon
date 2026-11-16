@@ -236,7 +236,7 @@ Tachyon is based on STAR 2.7.11b, Spliced Transcripts Alignment to a Reference, 
 
 If you use Tachyon in published work, cite the Tachyon preprint, Colangelo A., [Tachyon accelerates RNA-seq alignment while preserving STAR outputs in a multispecies benchmark](https://doi.org/10.5281/zenodo.24155618), Zenodo (2026), and STAR: Dobin A. et al., [STAR: ultrafast universal RNA-seq aligner](https://www.ncbi.nlm.nih.gov/pubmed/23104886). Bioinformatics 29(1):15-21 (2013).
 
-Tachyon exists because of STAR. If Tachyon is useful to you, please cite STAR and consider starring the [STAR repository](https://github.com/alexdobin/STAR). Report a problem to the STAR project only if you can reproduce it with STAR itself.
+Tachyon exists because of STAR. If Tachyon is useful to you, please cite STAR and consider starring both the [STAR repository](https://github.com/alexdobin/STAR) and [this one](https://github.com/AntonelloColangelo/Tachyon). Report a problem to the STAR project only if you can reproduce it with STAR itself.
 
 Tachyon is a separate project and is not an official STAR release. Alexander Dobin, Cold Spring Harbor Laboratory, the National Institutes of Health, and the authors and institutions behind its other components do not develop, review, or endorse Tachyon. See [LICENSE](LICENSE), section 4. The name STAR identifies the software Tachyon is based on.
 
