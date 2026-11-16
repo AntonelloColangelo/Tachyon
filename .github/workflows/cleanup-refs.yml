@@ -1,0 +1,39 @@
+name: One-off cleanup of branches and tags
+
+on:
+  push:
+    branches: [tachyon-0.4.1]
+    paths: [.github/workflows/cleanup-refs.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Move the release tag to the clean commit, delete the other tags and branches
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          KEEP_BRANCH: tachyon-0.4.1
+          KEEP_TAG: tachyon-0.4.1
+        run: |
+          set -u
+          NEW=$(gh api "repos/$REPO/git/ref/heads/$KEEP_BRANCH" --jq .object.sha)
+          echo "clean commit: $NEW"
+          # 1. release tag -> clean commit (keeps the published release and its assets)
+          gh api -X PATCH "repos/$REPO/git/refs/tags/$KEEP_TAG" -f sha="$NEW" -F force=true --jq '.ref + " -> " + .object.sha'
+          # 2. other tags
+          gh api --paginate "repos/$REPO/git/matching-refs/tags/" --jq '.[].ref' | while read -r ref; do
+            [ "$ref" = "refs/tags/$KEEP_TAG" ] && continue
+            gh api -X DELETE "repos/$REPO/git/$ref" > /dev/null && echo "deleted $ref" || echo "FAILED $ref"
+          done
+          # 3. other branches
+          gh api --paginate "repos/$REPO/git/matching-refs/heads/" --jq '.[].ref' | while read -r ref; do
+            [ "$ref" = "refs/heads/$KEEP_BRANCH" ] && continue
+            gh api -X DELETE "repos/$REPO/git/$ref" > /dev/null && echo "deleted $ref" || echo "FAILED $ref"
+          done
+          echo "remaining branches: $(gh api --paginate "repos/$REPO/git/matching-refs/heads/" --jq '.[].ref' | wc -l)"
+          echo "remaining tags: $(gh api --paginate "repos/$REPO/git/matching-refs/tags/" --jq '.[].ref' | wc -l)"
