@@ -23,9 +23,9 @@ jobs:
           D=tachyon-0.4.1-linux-x86_64
           mkdir ../work && cd ../work
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$D.tar.gz" --pattern SHA256SUMS
-          sha256sum --check SHA256SUMS
-          OLDBIN=$(tar xzOf "$D.tar.gz" "$D/Tachyon" | sha256sum | cut -d' ' -f1)
           tar xzf "$D.tar.gz"
+          sha256sum --check SHA256SUMS
+          OLDBIN=$(sha256sum "$D/Tachyon" | cut -d' ' -f1)
           cp "$GITHUB_WORKSPACE/LICENSE" "$GITHUB_WORKSPACE/THIRD_PARTY_NOTICES.md" "$GITHUB_WORKSPACE/CHANGES.md" "$D/"
           [ "$(sha256sum "$D/Tachyon" | cut -d' ' -f1)" = "$OLDBIN" ]
           tar czf "$D.tar.gz" "$D"
