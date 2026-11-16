@@ -6,6 +6,7 @@ Tachyon accelerates STAR 2.7.11b RNA-seq alignment while matching its alignment 
 
 [![License: free for individual non-commercial use](https://img.shields.io/badge/license-free%20individual%20non--commercial-blue)](LICENSE)
 [![Latest release](https://img.shields.io/github/v/release/AntonelloColangelo/Tachyon)](https://github.com/AntonelloColangelo/Tachyon/releases/latest)
+[![Preprint DOI](https://img.shields.io/badge/preprint-10.5281%2Fzenodo.24155618-blue)](https://doi.org/10.5281/zenodo.24155618)
 
 <p align="center">
   <picture>
@@ -35,6 +36,8 @@ The same holds beyond human: on six other organisms, from a protist to a plant, 
 With 16 threads on 16 physical cores the gap grows: on the same samples of five of these organisms **STAR took 20.1 minutes and Tachyon 4.4 minutes, 4.6 times faster**, with identical BAM records in every run.
 
 <p align="center"><a href="docs/benchmark-whole-samples.md">Benchmark details: samples, index, hardware, commands and limitations</a> · <a href="docs/benchmark-k562.md">Earlier K562 benchmark</a></p>
+
+**Preprint.** Colangelo A. *Tachyon accelerates RNA-seq alignment while preserving STAR outputs in a multispecies benchmark*. Zenodo (2026). [doi:10.5281/zenodo.24155618](https://doi.org/10.5281/zenodo.24155618)
 
 **Research use only.** Tachyon is a separate project from STAR. The executables are free for individual, non-commercial use; commercial use and use by organizations need a license from the author (see [LICENSE](LICENSE)). All tests were run by the author. Tachyon has not been independently validated.
 
@@ -231,7 +234,7 @@ For Tachyon support, contact Antonello Colangelo through this repository.
 
 Tachyon is based on STAR 2.7.11b, Spliced Transcripts Alignment to a Reference, by Alexander Dobin. STAR is released under the MIT License. Its copyright notice is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-If you use Tachyon in published work, cite STAR: Dobin A. et al., [STAR: ultrafast universal RNA-seq aligner](https://www.ncbi.nlm.nih.gov/pubmed/23104886). Bioinformatics 29(1):15-21 (2013).
+If you use Tachyon in published work, cite the Tachyon preprint, Colangelo A., [Tachyon accelerates RNA-seq alignment while preserving STAR outputs in a multispecies benchmark](https://doi.org/10.5281/zenodo.24155618), Zenodo (2026), and STAR: Dobin A. et al., [STAR: ultrafast universal RNA-seq aligner](https://www.ncbi.nlm.nih.gov/pubmed/23104886). Bioinformatics 29(1):15-21 (2013).
 
 Tachyon is a separate project and is not an official STAR release. Alexander Dobin, Cold Spring Harbor Laboratory, the National Institutes of Health, and the authors and institutions behind its other components do not develop, review, or endorse Tachyon. See [LICENSE](LICENSE), section 4. The name STAR identifies the software Tachyon is based on.
 
