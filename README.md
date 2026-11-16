@@ -39,6 +39,8 @@ With 16 threads on 16 physical cores the gap grows: on the same samples of five 
 
 **Preprint.** Colangelo A. *Tachyon accelerates RNA-seq alignment while preserving STAR outputs in a multispecies benchmark*. Zenodo (2026). [doi:10.5281/zenodo.24155618](https://doi.org/10.5281/zenodo.24155618)
 
+Tachyon exists because of STAR. If Tachyon is useful to you, please cite STAR and consider starring both the [STAR repository](https://github.com/alexdobin/STAR) and [this one](https://github.com/AntonelloColangelo/Tachyon). Report a problem to the STAR project only if you can reproduce it with STAR itself.
+
 **Research use only.** Tachyon is a separate project from STAR. The executables are free for individual, non-commercial use; commercial use and use by organizations need a license from the author (see [LICENSE](LICENSE)). All tests were run by the author. Tachyon has not been independently validated.
 
 ## Requirements
@@ -235,8 +237,6 @@ For Tachyon support, contact Antonello Colangelo through this repository.
 Tachyon is based on STAR 2.7.11b, Spliced Transcripts Alignment to a Reference, by Alexander Dobin. STAR is released under the MIT License. Its copyright notice is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 If you use Tachyon in published work, cite the Tachyon preprint, Colangelo A., [Tachyon accelerates RNA-seq alignment while preserving STAR outputs in a multispecies benchmark](https://doi.org/10.5281/zenodo.24155618), Zenodo (2026), and STAR: Dobin A. et al., [STAR: ultrafast universal RNA-seq aligner](https://www.ncbi.nlm.nih.gov/pubmed/23104886). Bioinformatics 29(1):15-21 (2013).
-
-Tachyon exists because of STAR. If Tachyon is useful to you, please cite STAR and consider starring both the [STAR repository](https://github.com/alexdobin/STAR) and [this one](https://github.com/AntonelloColangelo/Tachyon). Report a problem to the STAR project only if you can reproduce it with STAR itself.
 
 Tachyon is a separate project and is not an official STAR release. Alexander Dobin, Cold Spring Harbor Laboratory, the National Institutes of Health, and the authors and institutions behind its other components do not develop, review, or endorse Tachyon. See [LICENSE](LICENSE), section 4. The name STAR identifies the software Tachyon is based on.
 
