@@ -9,12 +9,14 @@ Tachyon accelerates STAR 2.7.11b RNA-seq alignment while matching its alignment 
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/benchmark-k562-dark.svg">
-    <img src="docs/benchmark-k562-light.svg" alt="Benchmark on ENCODE K562, 5 million read pairs, 16 threads. STAR 2.7.11b: 113.6 s, 44,018 read pairs per second, 32.92 GiB peak RSS, 32.87 GiB anonymous memory. Tachyon 0.4: 24.3 s, 205,381 read pairs per second, 37.63 GiB peak RSS, 5.05 GiB anonymous memory." width="860">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/benchmark-whole-samples-dark.svg">
+    <img src="docs/benchmark-whole-samples-light.svg" alt="Benchmark on 8 whole human RNA-seq samples, 375 million reads and read pairs, whole human genome GRCh38, 16 threads. STAR 2.7.11b: 42.2 minutes in total. Tachyon 0.4.1: 15.7 minutes, 2.7 times faster, with output identical to STAR record by record in every run." width="860">
   </picture>
 </p>
 
-<p align="center"><a href="docs/benchmark-k562.md">Benchmark details, hardware, commands and limitations</a></p>
+Eight complete human RNA-seq samples, 375 million reads and read pairs, aligned to the whole human genome: **STAR 2.7.11b took 42.2 minutes, Tachyon 0.4.1 took 15.7 minutes, 2.7 times faster**. Every Tachyon run was compared with STAR on the same sample, and the output was identical record by record.
+
+<p align="center"><a href="docs/benchmark-whole-samples.md">Benchmark details: samples, index, hardware, commands and limitations</a> · <a href="docs/benchmark-k562.md">Earlier K562 benchmark</a></p>
 
 **Research use only.** Tachyon is a separate project from STAR. The executables are free for individual, non-commercial use; commercial use and use by organizations need a license from the author (see [LICENSE](LICENSE)). All tests were run by the author. Tachyon has not been independently validated.
 
